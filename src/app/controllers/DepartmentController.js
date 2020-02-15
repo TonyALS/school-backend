@@ -2,6 +2,15 @@ import * as Yup from 'yup';
 import Department from '../models/Department';
 
 class DepartmentContoller {
+  async index(req, res) {
+    try {
+      const departments = await Department.findAll();
+      return res.json(departments);
+    } catch (erro) {
+      return res.status(500).json(erro);
+    }
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       department_name: Yup.string()
