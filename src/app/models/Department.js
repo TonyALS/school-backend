@@ -11,6 +11,11 @@ class Department extends Model {
         },
         department_name: {
           type: Sequelize.STRING,
+          validate: {
+            notEmpty: {
+              msg: 'Campo não pode ser vazio.',
+            },
+          },
         },
       },
       {
