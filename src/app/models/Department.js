@@ -25,6 +25,14 @@ class Department extends Model {
     );
     return this;
   }
+
+  //  Um departamento possui vários professores:
+  static associate(models) {
+    this.hasMany(models.Teacher, {
+      foreignKey: 'department_id',
+      as: 'teachers',
+    });
+  }
 }
 
 export default Department;
