@@ -33,6 +33,16 @@ class TeacherController {
       return res.status(500).json(error);
     }
   }
+
+  async update(req, res) {
+    try {
+      const teacher = await Teacher.findByPk(req.params.id_teacher);
+      await teacher.update(req.body);
+      return res.status(200).json(teacher);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  }
 }
 
 export default new TeacherController();
