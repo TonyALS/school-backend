@@ -39,9 +39,9 @@ class Teacher extends Model {
 
   //  Um professor pertence a um departamento:
   static associate(models) {
-    this.belongsTo(models.Department, {
-      foreignKey: 'department_id',
-      as: 'department',
+    this.hasOne(models.DepartmentTeacher, {
+      foreignKey: 'teacher_id',
+      as: 'teacher',
     });
   }
 }
