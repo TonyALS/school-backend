@@ -25,6 +25,27 @@ class DepartmentTeacherController {
   async store(req, res) {
     const { department_id, teacher_id } = req.body;
 
+    //  Verificar se o professor já está cadastrado na tabela DepartmentTeacher:
+    const deptConflict = await DepartmentTeacher.findOne({
+      where: {
+        teacher_id,
+      },
+      include: [
+        {
+          association: 'department',
+          attributes: ['department_name'],
+        },
+      ],
+    });
+
+    //  Se o ID do professor estiver na tabela significa que ele já está vinculado a um
+    //  departamento:
+    if (deptConflict) {
+      return res.status(400).json({
+        erro: `Professor já vinculado ao departamento: ${deptConflict.department.department_name}`,
+      });
+    }
+
     try {
       await DepartmentTeacher.create({
         department_id,
