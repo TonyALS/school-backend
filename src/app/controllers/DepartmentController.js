@@ -29,6 +29,16 @@ class DepartmentContoller {
       return res.json(error);
     }
   }
+
+  async update(req, res) {
+    try {
+      const department = await Department.findByPk(req.params.id_department);
+      await department.update(req.body);
+      return res.json(department);
+    } catch (error) {
+      return res.json(error);
+    }
+  }
 }
 
 export default new DepartmentContoller();
