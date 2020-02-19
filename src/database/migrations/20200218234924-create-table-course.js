@@ -1,22 +1,24 @@
 module.exports = {
   up: (queryInterface, Sequelize) =>
-    queryInterface.createTable('department_teacher', {
-      id_department_teacher: {
+    queryInterface.createTable('course', {
+      id_course: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
         allowNull: false,
+        autoIncrement: true,
+      },
+      course_name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      mec_authorization: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       department_id: {
         type: Sequelize.INTEGER,
         references: { model: 'department', key: 'id_department' },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull: true,
-      },
-      teacher_id: {
-        type: Sequelize.INTEGER,
-        references: { model: 'teacher', key: 'id_teacher' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,
@@ -31,5 +33,5 @@ module.exports = {
       },
     }),
 
-  down: queryInterface => queryInterface.dropTable('department_teacher'),
+  down: queryInterface => queryInterface.dropTable('course'),
 };
