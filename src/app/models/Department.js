@@ -26,11 +26,16 @@ class Department extends Model {
     return this;
   }
 
-  //  Um departamento possui vários professores:
   static associate(models) {
+    //  Um departamento possui vários professores:
     this.hasMany(models.Teacher, {
       foreignKey: 'department_id',
       as: 'teachers',
+    });
+    //  Um departamento possui vários cursos:
+    this.hasMany(models.Teacher, {
+      foreignKey: 'department_id',
+      as: 'courses',
     });
   }
 }
