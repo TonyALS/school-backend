@@ -34,6 +34,11 @@ class Course extends Model {
       foreignKey: 'department_id',
       as: 'department',
     });
+    //  Um curso possui várias classes:
+    this.hasMany(models.SchoolClass, {
+      foreignKey: 'course_id',
+      as: 'schoolclass',
+    });
   }
 }
 

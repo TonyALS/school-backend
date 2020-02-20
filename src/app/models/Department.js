@@ -33,7 +33,7 @@ class Department extends Model {
       as: 'teachers',
     });
     //  Um departamento possui vários cursos:
-    this.hasMany(models.Teacher, {
+    this.hasMany(models.Course, {
       foreignKey: 'department_id',
       as: 'courses',
     });

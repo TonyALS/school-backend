@@ -2,6 +2,7 @@ import { Router } from 'express';
 import DepartmentController from './app/controllers/DepartmentController';
 import TeacherController from './app/controllers/TeacherController';
 import CourseController from './app/controllers/CourseController';
+import SchoolClassController from './app/controllers/SchoolClassController';
 
 //  Middlewares
 import validateCourseStore from './app/validators/CourseStore';
@@ -31,5 +32,8 @@ routes.put(
 
 routes.post('/courses', validateCourseStore, CourseController.store);
 routes.get('/courses', CourseController.index);
+
+routes.post('/classes', SchoolClassController.store);
+routes.get('/classes', SchoolClassController.index);
 
 export default routes;
