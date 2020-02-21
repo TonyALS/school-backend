@@ -7,19 +7,28 @@ import SchoolClassController from './app/controllers/SchoolClassController';
 //  Middlewares
 import validateCourseStore from './app/validators/CourseStore';
 import validateTeacherStore from './app/validators/TeacherStore';
+import validateDepartmentStore from './app/validators/DepartmentStore';
 
 const routes = new Router();
 
-routes.post('/departments', DepartmentController.store);
+routes.post(
+  '/departments',
+  validateDepartmentStore,
+  DepartmentController.store
+);
+routes.put(
+  '/departments/update/:id_department',
+  validateDepartmentStore,
+  DepartmentController.update
+);
 routes.get('/departments', DepartmentController.index);
-routes.put('/departments/update/:id_department', DepartmentController.update);
 routes.get(
   '/departments/:id_department/teachers',
-  DepartmentController.getTeacherByDepartment
+  DepartmentController.ListTeacherByDepartment
 );
 routes.get(
   '/departments/:id_department/courses',
-  DepartmentController.getCourseByDepartment
+  DepartmentController.ListCourseByDepartment
 );
 
 routes.post('/teachers', validateTeacherStore, TeacherController.store);
@@ -32,6 +41,7 @@ routes.put(
 
 routes.post('/courses', validateCourseStore, CourseController.store);
 routes.get('/courses', CourseController.index);
+routes.get('/courses/:id_course/classes', CourseController.ListClassByCourse);
 
 routes.post('/classes', SchoolClassController.store);
 routes.get('/classes', SchoolClassController.index);
