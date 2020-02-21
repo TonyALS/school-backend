@@ -1,22 +1,27 @@
 import Course from '../models/Course';
+import CourseListService from '../services/CourseListService';
 
 class CourseController {
   async index(req, res) {
-    try {
-      const courses = await Course.findAll({
-        attributes: ['course_name', 'mec_authorization'],
-        include: [
-          {
-            association: 'department',
-            attributes: ['department_name'],
-          },
-        ],
-      });
+    const courses = await CourseListService.getAllCourses();
 
-      return res.json(courses);
-    } catch (error) {
-      return res.json(error);
+    if (courses.count === 0) {
+      return res.status(400).json({ error: 'Nenhum curso encontrado' });
     }
+
+    return res.status(200).json(courses);
+  }
+
+  async ListClassByCourse(req, res) {
+    const course_id = req.params.id_course;
+
+    if (!(await CourseListService.searchCourseById({ course_id }))) {
+      return res.status(400).json({ error: 'Curso não encontrado' });
+    }
+    const classByCourse = await CourseListService.getClassByCourse({
+      course_id,
+    });
+    return res.status(200).json(classByCourse);
   }
 
   async store(req, res) {
