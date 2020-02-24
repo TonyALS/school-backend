@@ -1,22 +1,14 @@
 import SchoolClass from '../models/SchoolClass';
+import SchoolClassListService from '../services/SchoolClassListService';
 
 class SchoolClassController {
   async index(req, res) {
-    try {
-      const classes = await SchoolClass.findAll({
-        attributes: ['class_period', 'student_number'],
-        include: [
-          {
-            association: 'course',
-            attributes: ['course_name'],
-          },
-        ],
-      });
+    const classes = await SchoolClassListService.getAllClass();
 
-      return res.json(classes);
-    } catch (error) {
-      return res.json(error);
+    if (classes.count === 0) {
+      return res.status(400).json({ error: 'Nenhuma classe encontrada' });
     }
+    return res.status(200).json(classes);
   }
 
   async store(req, res) {

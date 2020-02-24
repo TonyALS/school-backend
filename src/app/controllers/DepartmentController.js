@@ -1,5 +1,6 @@
 import Department from '../models/Department';
 import DepartmentListService from '../services/DepartmentListService';
+import CourseListService from '../services/CourseListService';
 
 class DepartmentContoller {
   //  Listar todos os departamentos:
@@ -42,11 +43,9 @@ class DepartmentContoller {
       return res.status(400).json({ error: 'Departamento não encontrado' });
     }
 
-    const courseByDepartment = await DepartmentListService.getCourseByDepartment(
-      {
-        department_id,
-      }
-    );
+    const courseByDepartment = await CourseListService.getCourseByDepartment({
+      department_id,
+    });
     return res.status(200).json(courseByDepartment);
   }
 

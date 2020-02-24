@@ -1,5 +1,6 @@
 import Course from '../models/Course';
 import CourseListService from '../services/CourseListService';
+import SchoolClassListService from '../services/SchoolClassListService';
 
 class CourseController {
   async index(req, res) {
@@ -18,7 +19,7 @@ class CourseController {
     if (!(await CourseListService.searchCourseById({ course_id }))) {
       return res.status(400).json({ error: 'Curso não encontrado' });
     }
-    const classByCourse = await CourseListService.getClassByCourse({
+    const classByCourse = await SchoolClassListService.getClassByCourse({
       course_id,
     });
     return res.status(200).json(classByCourse);

@@ -1,7 +1,7 @@
 import Course from '../models/Course';
-import SchoolClass from '../models/SchoolClass';
 
 class CourseListService {
+  //  Busca um curso:
   async searchCourseById({ course_id }) {
     try {
       const course = await Course.findByPk(course_id);
@@ -11,6 +11,7 @@ class CourseListService {
     }
   }
 
+  //  Lista todos os cursos:
   async getAllCourses() {
     try {
       const courses = await Course.findAndCountAll({
@@ -28,30 +29,24 @@ class CourseListService {
     }
   }
 
-  //  Lista as classes de um determinado curso
-  async getClassByCourse({ course_id }) {
+  //  Listar todos os cursos de um departmento:
+  async getCourseByDepartment({ department_id }) {
     try {
-      const classByCourse = await SchoolClass.findAndCountAll({
+      const courseByDepartment = await Course.findAll({
         where: {
-          course_id,
+          department_id,
         },
-        attributes: [
-          'class_period',
-          'student_number',
-          'initial_date',
-          'final_date',
-        ],
+        attributes: ['course_name', 'mec_authorization'],
         include: [
           {
-            association: 'course',
-            attributes: ['course_name'],
+            association: 'department',
+            attributes: ['department_name'],
           },
         ],
       });
-
-      return classByCourse;
-    } catch (error) {
-      throw new Error(error);
+      return courseByDepartment;
+    } catch (erro) {
+      throw new Error(erro);
     }
   }
 }
