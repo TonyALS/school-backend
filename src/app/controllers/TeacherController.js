@@ -1,4 +1,5 @@
 import Teacher from '../models/Teacher';
+import TeacherListService from '../services/TeacherListService';
 
 class TeacherController {
   async index(req, res) {
@@ -35,8 +36,14 @@ class TeacherController {
   }
 
   async update(req, res) {
+    const teacher_id = req.params.id_teacher;
+
+    if (!(await TeacherListService.searchTeacherById({ teacher_id }))) {
+      return res.status(400).json({ error: 'Professor não encontrado' });
+    }
+
     try {
-      const teacher = await Teacher.findByPk(req.params.id_teacher);
+      const teacher = await Teacher.findByPk(teacher_id);
       await teacher.update(req.body);
       return res.status(200).json(teacher);
     } catch (error) {
