@@ -33,6 +33,7 @@ routes.get(
 
 routes.post('/teachers', validateTeacherStore, TeacherController.store);
 routes.get('/teachers', TeacherController.index);
+routes.delete('/teachers/:id_teacher', TeacherController.delete);
 routes.put(
   '/teachers/:id_teacher',
   validateTeacherStore,

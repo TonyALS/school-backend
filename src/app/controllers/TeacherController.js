@@ -50,6 +50,21 @@ class TeacherController {
       return res.status(500).json(error);
     }
   }
+
+  async delete(req, res) {
+    const teacher = await Teacher.findByPk(req.params.id_teacher);
+
+    try {
+      await teacher.destroy();
+      return res.status(200).json({
+        success: 'Professor excluído com sucesso',
+      });
+    } catch (error) {
+      return res.status(500).json({
+        error: 'Não foi possível atender à solicitação',
+      });
+    }
+  }
 }
 
 export default new TeacherController();
