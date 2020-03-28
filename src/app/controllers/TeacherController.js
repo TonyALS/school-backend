@@ -5,7 +5,7 @@ class TeacherController {
   async index(req, res) {
     try {
       const teacher = await Teacher.findAll({
-        attributes: ['first_name', 'last_name', 'status'],
+        attributes: ['id_teacher', 'first_name', 'last_name', 'status'],
         include: [
           {
             association: 'department',

@@ -15,7 +15,7 @@ class CourseListService {
   async getAllCourses() {
     try {
       const courses = await Course.findAndCountAll({
-        attributes: ['course_name', 'mec_authorization'],
+        attributes: ['id_course', 'course_name', 'mec_authorization'],
         include: [
           {
             association: 'department',

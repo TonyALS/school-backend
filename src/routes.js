@@ -42,6 +42,9 @@ routes.put(
 routes.post('/courses', validateCourseStore, CourseController.store);
 routes.get('/courses', CourseController.index);
 routes.get('/courses/:id_course/classes', CourseController.ListClassByCourse);
+routes.get('/course/:id_course', CourseController.getCourse);
+routes.delete('/courses/:id_course', CourseController.delete);
+routes.put('/course/edit/:id_course', CourseController.update);
 
 routes.post('/classes', SchoolClassController.store);
 routes.get('/classes', SchoolClassController.index);

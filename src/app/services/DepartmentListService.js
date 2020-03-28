@@ -15,7 +15,7 @@ class DepartmentListService {
   async getAllDepartments() {
     try {
       const departments = await Department.findAndCountAll({
-        attributes: ['department_name'],
+        attributes: ['id_department', 'department_name'],
       });
       return departments;
     } catch (error) {
