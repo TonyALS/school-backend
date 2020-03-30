@@ -32,18 +32,17 @@ class CourseController {
   }
 
   async store(req, res) {
-    const courseExists = await Course.findOne({
-      where: {
-        course_name: req.body.course_name,
-      },
-    });
-    if (courseExists) {
-      return res.status(400).json({
-        error: 'Curso já cadastrado na plataforma.',
-      });
-    }
-
     try {
+      const courseExists = await Course.findOne({
+        where: {
+          course_name: req.body.course_name,
+        },
+      });
+      if (courseExists) {
+        return res.status(400).json({
+          error: 'Curso já cadastrado na plataforma.',
+        });
+      }
       await Course.create(req.body);
       return res.status(200).json({
         success: 'Cadastro realizado com sucesso',
@@ -54,9 +53,8 @@ class CourseController {
   }
 
   async delete(req, res) {
-    const course = await Course.findByPk(req.params.id_course);
-
     try {
+      const course = await Course.findByPk(req.params.id_course);
       await course.destroy();
       return res.status(200).json({
         success: 'Curso excluído com sucesso',
@@ -69,18 +67,6 @@ class CourseController {
   }
 
   async update(req, res) {
-    // const courseExists = await Course.findOne({
-    //   where: {
-    //     course_name: req.body.course_name,
-    //   },
-    // });
-
-    // if (courseExists) {
-    //   return res.status(400).json({
-    //     error: 'Curso já cadastrado na plataforma.',
-    //   });
-    // }
-
     try {
       const course = await Course.findByPk(req.params.id_course);
       await course.update(req.body);
