@@ -48,7 +48,7 @@ class CourseController {
         success: 'Cadastro realizado com sucesso',
       });
     } catch (error) {
-      return res.status(400).json(error);
+      return res.status(500).json(error);
     }
   }
 
@@ -75,7 +75,7 @@ class CourseController {
       });
     } catch (error) {
       if (error.name === 'SequelizeUniqueConstraintError') {
-        return res.status(500).json({
+        return res.status(400).json({
           error: 'Curso já cadastrado na plataforma',
         });
       }
