@@ -23,5 +23,6 @@ module.exports = {
     "no-unused-expressions": "off",
     "camelcase": "off",
     "no-unused-vars": ["error", { "argsIgnorePattern": "next" }],
+    "no-undef": "off"
   },
 };
