@@ -52,8 +52,9 @@ class TeacherController {
   }
 
   async delete(req, res) {
+    const teacher = await Teacher.findByPk(req.params.id_teacher);
+
     try {
-      const teacher = await Teacher.findByPk(req.params.id_teacher);
       await teacher.destroy();
       return res.status(200).json({
         success: 'Professor excluído com sucesso',
