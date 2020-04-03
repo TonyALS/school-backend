@@ -1,3 +1,7 @@
+# Este projeto está sendo refatorado para uso de TyperScript e padrões TDD/CleanCode. Criei outro repositório em paralelo para isso:
+Link: https://github.com/TonyALS/school-backend-ts <br>
+Estou adquirindo as skills em TyperScript para implementar as soluções da melhor forma possível e como sempre sugestões são bem-vindas.
+
 ## API - Gerenciamento de escolas
 
 Backend sendo desenvolvido em NodeJS utilizando Docker para conteinerização do ambiente de banco de dados MySQL e ORM
