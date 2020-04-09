@@ -1,5 +1,5 @@
 # Este projeto está sendo refatorado para uso de TyperScript e padrões TDD/CleanCode. Criei outro repositório em paralelo para isso:
-Link: https://github.com/TonyALS/school-backend-ts <br>
+Link: https://github.com/TonyALS/api-school <br>
 Estou adquirindo as skills em TyperScript para implementar as soluções da melhor forma possível e como sempre sugestões são bem-vindas.
 
 ## API - Gerenciamento de escolas
